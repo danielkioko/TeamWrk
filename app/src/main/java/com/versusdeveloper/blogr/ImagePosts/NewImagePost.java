@@ -37,7 +37,7 @@ public class NewImagePost extends AppCompatActivity {
 
     private static final int GALLERY_REQUEST_CODE = 2;
     private StorageReference storage;
-    private FirebaseDatabase database;
+    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseRef;
     private DatabaseReference mDatabaseUsers;
     private FirebaseUser mCurrentUser;
@@ -56,7 +56,7 @@ public class NewImagePost extends AppCompatActivity {
         post = findViewById(R.id.btnPost);
 
         storage = FirebaseStorage.getInstance().getReference();
-        databaseRef = database.getInstance().getReference().child("BlogPosts");
+        databaseRef = FirebaseDatabase.getInstance().getReference().child("BlogPosts");
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
         mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());

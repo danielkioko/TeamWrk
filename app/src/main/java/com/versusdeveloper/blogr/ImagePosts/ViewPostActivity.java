@@ -64,7 +64,6 @@ public class ViewPostActivity extends AppCompatActivity {
                 singleTitle.setText(post_title);
                 singleDesc.setText(post_desc);
                 Picasso.with(ViewPostActivity.this).load(post_image).into(singleImage);
-
             }
 
             @Override

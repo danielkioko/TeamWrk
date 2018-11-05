@@ -32,7 +32,6 @@ public class ImageTab extends Fragment {
     Vibrator vibrator;
     View view;
 
-
     private FloatingActionButton fab;
 
     @Override

@@ -18,14 +18,14 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        uName = findViewById(R.id.pName);
-        uEmail = findViewById(R.id.pEmail);
-
-        String username = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-        uName.setText(username);
-        uEmail.setText(email);
+//        uName = findViewById(R.id.pName);
+//        uEmail = findViewById(R.id.pEmail);
+//
+//        String username = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+//        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+//
+//        uName.setText(username);
+//        uEmail.setText(email);
 
 
 
