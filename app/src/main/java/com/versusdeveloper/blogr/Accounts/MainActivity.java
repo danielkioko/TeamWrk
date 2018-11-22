@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 String userEmail = email.getText().toString().trim();
                 String userPassword = password.getText().toString().trim();
 
+
                 if (userEmail.isEmpty()){
                     Toast.makeText(MainActivity.this, "No Email?", Toast.LENGTH_LONG).show();
                 }else if (userPassword.isEmpty()){

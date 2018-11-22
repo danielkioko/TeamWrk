@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "32296153639",
-    "firebase_url": "https://mots-835a6.firebaseio.com",
-    "project_id": "mots-835a6",
-    "storage_bucket": "mots-835a6.appspot.com"
+    "project_number": "595483531566",
+    "firebase_url": "https://github-projects-65760.firebaseio.com",
+    "project_id": "github-projects-65760",
+    "storage_bucket": "github-projects-65760.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:32296153639:android:728bf7f45850ba64",
+        "mobilesdk_app_id": "1:595483531566:android:d1faa79aa2e0d9b6",
         "android_client_info": {
-          "package_name": "com.danielkioko.mots"
+          "package_name": "com.danielkioko.podplay"
         }
       },
       "oauth_client": [
         {
-          "client_id": "32296153639-6fmu20rt357nm46hms1agg4n09kcdc8c.apps.googleusercontent.com",
+          "client_id": "595483531566-uljvt6b7eo2tf9ird3226bud1sqaof11.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.danielkioko.mots",
+            "package_name": "com.danielkioko.podplay",
             "certificate_hash": "5fbce72992cb44938a0a40b961f4419c8e2303aa"
           }
         },
         {
-          "client_id": "32296153639-aif26md7laierttbd1slfsadop2gfops.apps.googleusercontent.com",
+          "client_id": "595483531566-o06r2hjr896qvtmfnpn3nss5djan9g7b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyADhRrBlx0nMGr0xroO0zmvveWQMcF3jkg"
+          "current_key": "AIzaSyB2F3AaHKejwu4tgLK-hZUgWjpU88DG4tE"
         }
       ],
       "services": {
@@ -40,8 +40,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "32296153639-aif26md7laierttbd1slfsadop2gfops.apps.googleusercontent.com",
+              "client_id": "595483531566-o06r2hjr896qvtmfnpn3nss5djan9g7b.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "595483531566-uamkvb3tj7fbb4bjvlem4hoglejgcj58.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "danielnzioka.Blogr"
+              }
             }
           ]
         },
@@ -52,28 +59,28 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:32296153639:android:c11eafe4f818a3a8",
+        "mobilesdk_app_id": "1:595483531566:android:0042d4835280f8f1",
         "android_client_info": {
-          "package_name": "com.versusdeveloper.appblogsector"
+          "package_name": "com.danielkioko.sant"
         }
       },
       "oauth_client": [
         {
-          "client_id": "32296153639-13a939on11j607pm4sihmnffgspcdevg.apps.googleusercontent.com",
+          "client_id": "595483531566-jif1ad2llei0f8rqc4lab4e8i6hva69k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.versusdeveloper.appblogsector",
+            "package_name": "com.danielkioko.sant",
             "certificate_hash": "5fbce72992cb44938a0a40b961f4419c8e2303aa"
           }
         },
         {
-          "client_id": "32296153639-aif26md7laierttbd1slfsadop2gfops.apps.googleusercontent.com",
+          "client_id": "595483531566-o06r2hjr896qvtmfnpn3nss5djan9g7b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyADhRrBlx0nMGr0xroO0zmvveWQMcF3jkg"
+          "current_key": "AIzaSyB2F3AaHKejwu4tgLK-hZUgWjpU88DG4tE"
         }
       ],
       "services": {
@@ -84,8 +91,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "32296153639-aif26md7laierttbd1slfsadop2gfops.apps.googleusercontent.com",
+              "client_id": "595483531566-o06r2hjr896qvtmfnpn3nss5djan9g7b.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "595483531566-uamkvb3tj7fbb4bjvlem4hoglejgcj58.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "danielnzioka.Blogr"
+              }
             }
           ]
         },
@@ -96,28 +110,71 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:32296153639:android:850a7ba66a33e4a0",
+        "mobilesdk_app_id": "1:595483531566:android:f3bce99d77e1d30d",
+        "android_client_info": {
+          "package_name": "com.danielkioko.shopr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595483531566-ijlepap74eeusaaddc38h29v79q123bq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.danielkioko.shopr",
+            "certificate_hash": "5fbce72992cb44938a0a40b961f4419c8e2303aa"
+          }
+        },
+        {
+          "client_id": "595483531566-o06r2hjr896qvtmfnpn3nss5djan9g7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2F3AaHKejwu4tgLK-hZUgWjpU88DG4tE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595483531566-o06r2hjr896qvtmfnpn3nss5djan9g7b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "595483531566-uamkvb3tj7fbb4bjvlem4hoglejgcj58.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "danielnzioka.Blogr"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595483531566:android:850a7ba66a33e4a0",
         "android_client_info": {
           "package_name": "com.versusdeveloper.blogr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "32296153639-4osejoajjph7tl4032nlq6fso79a89f2.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.versusdeveloper.blogr",
-            "certificate_hash": "5fbce72992cb44938a0a40b961f4419c8e2303aa"
-          }
-        },
-        {
-          "client_id": "32296153639-aif26md7laierttbd1slfsadop2gfops.apps.googleusercontent.com",
+          "client_id": "595483531566-o06r2hjr896qvtmfnpn3nss5djan9g7b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyADhRrBlx0nMGr0xroO0zmvveWQMcF3jkg"
+          "current_key": "AIzaSyB2F3AaHKejwu4tgLK-hZUgWjpU88DG4tE"
         }
       ],
       "services": {
@@ -125,13 +182,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "32296153639-aif26md7laierttbd1slfsadop2gfops.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

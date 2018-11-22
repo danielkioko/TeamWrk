@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.versusdeveloper.blogr.Accounts.MainActivity;
 import com.versusdeveloper.blogr.ProfileActivity;
 import com.versusdeveloper.blogr.R;
 import com.versusdeveloper.blogr.VidyoActivity;
@@ -80,7 +81,8 @@ public class ReminderTab extends Fragment {
                 alert.setPositiveButton("Proceed to Log out", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        fAuth.signOut();
+                        startActivity(new Intent(getActivity(), MainActivity.class));
                     }
                 });
 

@@ -11,12 +11,10 @@ import com.versusdeveloper.blogr.R;
 
 public class BlogzoneViewHolder extends RecyclerView.ViewHolder{
         View mView;
-
         public BlogzoneViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
         }
-
         public void setTitle(String title){
             TextView post_title = mView.findViewById(R.id.tvTopic);
             post_title.setText(title);

@@ -36,6 +36,7 @@
         <activity android:name=".ReminderPosts.ViewNoteActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".VidyoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity android:name=".Accounts.MainActivity"
             android:screenOrientation="portrait">
