@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.versusdeveloper.blogr.Accounts.MainActivity;
 import com.versusdeveloper.blogr.ImagePosts.ImageTab;
 import com.versusdeveloper.blogr.ImagePosts.NewImagePost;
 import com.versusdeveloper.blogr.ReminderPosts.AddReminderActivity;

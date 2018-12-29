@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VidyoActivity">
+    tools:context=".VidyoActivity"
+    android:background="@color/roseGold">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabDisconnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="Start"
+        app:fab_colorNormal="@color/roseGold"
+        app:layout_constraintBottom_toBottomOf="@+id/fabConnect"
         app:layout_constraintStart_toEndOf="@+id/fabConnect"
         app:srcCompat="@android:drawable/presence_offline" />
 
@@ -24,8 +26,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="Connect"
+        app:fab_colorNormal="@color/roseGold"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/stat_notify_sync" />
 
@@ -36,22 +41,28 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="Disconnect"
+        app:fab_colorNormal="@color/roseGold"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@+id/fabConnect"
         app:srcCompat="@android:drawable/stat_sys_phone_call" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/fabConnect"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <FrameLayout
             android:id="@+id/videoFrame"

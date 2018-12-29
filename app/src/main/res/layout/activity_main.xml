@@ -5,7 +5,7 @@
     android:id="@+id/activityMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Accounts.MainActivity">
+    tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/etEmail"
@@ -14,7 +14,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/roseGold"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -35,7 +35,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/roseGold"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -58,7 +58,7 @@
         android:background="@android:color/transparent"
         android:text="Login"
         android:textAllCaps="false"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/roseGold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
@@ -85,6 +85,7 @@
         android:layout_marginStart="8dp"
         android:text="Create An Account"
         android:textAllCaps="false"
+        android:textColor="@color/roseGold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

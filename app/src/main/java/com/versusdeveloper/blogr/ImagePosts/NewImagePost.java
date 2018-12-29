@@ -90,11 +90,9 @@ public class NewImagePost extends AppCompatActivity {
                             filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-
                                     final Uri downloadUrl = uri;
                                     Toast.makeText(getApplicationContext(), "Succesfully Uploaded", Toast.LENGTH_SHORT).show();
                                     final DatabaseReference newPost = databaseRef.push();
-
                                     mDatabaseUsers.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -126,18 +124,14 @@ public class NewImagePost extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        //image from gallery result
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK){
             uri = data.getData();
             postImage.setImageURI(uri);
         }
-
     }
 }

@@ -23,14 +23,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.versusdeveloper.blogr.Accounts.MainActivity;
-import com.versusdeveloper.blogr.Accounts.RegisterTab;
 import com.versusdeveloper.blogr.Accounts.User;
 
 import java.io.IOException;
@@ -39,18 +40,22 @@ import java.util.UUID;
 public class RegisterActivity extends AppCompatActivity {
 
     private ImageView imageView;
-    private Uri filePath;
-    private final int PICK_IMAGE_REQUEST = 71;
+    private static final int GALLERY_REQUEST_CODE = 2;
+
+
+    Uri uri = null;
 
     EditText userName, email, password;
     Button Register;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mUsersDBref;
+    DatabaseReference databaseRef;
     private ProgressDialog mDialog;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseUser mCurrentUser;
+
+    StorageReference storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +63,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+        storage = FirebaseStorage.getInstance().getReference();
+
+        databaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        mCurrentUser = mAuth.getCurrentUser();
+        mUsersDBref = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
 
         userName = findViewById(R.id.etName);
         email = findViewById(R.id.etNewEmail);
@@ -112,8 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Log.d(RegisterTab.class.getName(), "User profile updated.");
-                                        /***CREATE USER IN FIREBASE DB AND REDIRECT ON SUCCESS**/
+                                        Log.d(RegisterActivity.class.getName(), "User profile updated.");
                                         createUserInDb(newUser.getUid(), newUser.getDisplayName(), newUser.getEmail());
                                     }else{
                                         Toast.makeText(RegisterActivity.this, "Error " + task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -125,45 +132,50 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void createUserInDb(String uid, String displayName, String email) {
-
-        if(filePath != null)
-        {
+    private void createUserInDb(String uid, String displayName, final String email) {
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
-            ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            final StorageReference filepath = storage.child("userFiles").child(uri.getLastPathSegment());
+            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        public void onSuccess(final Uri uri) {
+
+                        final Uri downloadUrl = uri;
+                        Toast.makeText(getApplicationContext(), "Succesfully Uploaded", Toast.LENGTH_SHORT).show();
+                        final DatabaseReference newUser = databaseRef.push();
+
+                            mUsersDBref.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    newUser.child("profilePhoto").setValue(downloadUrl.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            signIn();
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
                         }
                     });
-        }
 
-        String image = storageReference.getPath();
+                }
+            });
 
         mUsersDBref = FirebaseDatabase.getInstance().getReference().child("Users");
-        User user = new User(uid, displayName, email, image);
+        User user = new User(uid, displayName, email);
         mUsersDBref.child(uid).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -176,25 +188,33 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    private void signIn() {
+
+        String emailAdress = email.getText().toString().trim();
+        String accPassword = password.getText().toString().trim();
+
+        mAuth.signInWithEmailAndPassword(emailAdress, accPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                startActivity(new Intent(RegisterActivity.this, Tabs.class));
+            }
+        });
+    }
+
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Profile Photo"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select Profile Photo"), GALLERY_REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null ) {
-            filePath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                imageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        //image from gallery result
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK){
+            uri = data.getData();
+            imageView.setImageURI(uri);
         }
     }
 }

@@ -16,56 +16,44 @@ public class VidyoActivity extends AppCompatActivity implements Connector.IConne
 
     private Connector vc;
     private FrameLayout videoFrame;
-    private FloatingActionButton start, connect, disconnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vidyo);
 
-        ConnectorPkg.setApplicationUIContext(this);
+        ConnectorPkg.setApplicationUIContext(VidyoActivity.this);
         ConnectorPkg.initialize();
         videoFrame = findViewById(R.id.videoFrame);
-
-        start = findViewById(R.id.fabStart);
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Start();
-            }
-        });
-
-        connect = findViewById(R.id.fabConnect);
-        connect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Connect();
-            }
-        });
-
-        disconnect = findViewById(R.id.fabDisconnect);
-        disconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Disconnect();
-            }
-        });
     }
 
-    protected void Start() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startConnecting();
+    }
+
+    private void startConnecting() {
         vc = new Connector(videoFrame, Connector.ConnectorViewStyle.VIDYO_CONNECTORVIEWSTYLE_Default, 15, "warning info@VidyoClient info@VidyoConnector", "", 0);
         vc.showViewAt(videoFrame, 0, 0, videoFrame.getWidth(), videoFrame.getHeight());
         Toast.makeText(VidyoActivity.this, "Starting", Toast.LENGTH_LONG).show();
         String token = "cHJvdmlzaW9uAHVzZXIxQGJmY2YwYS52aWR5by5pbwA2MzcxMDAyOTMxNQAAMTBhNDdjYjdkYWIxNDUyZDRmZTgzOWYyNjlmZmE2NTI4MWU5YmY1YmU2OGUxZjJjNjJjY2VhNzc0NWYyZGNiYjkyYzVkNTYwNmZjZDEyZTQ3NmRlZWI0NTE1MGU3OTc2";
-//        vc.connect("prod.vidyo.io", token, "DemoUser", "DemoRoom", this);
-        vc.connect("https://developer.vidyo.io/join/uTwfkLPB", token, "DemoUser", "DemoRoom", VidyoActivity.this);
+        vc.connect("https://developer.vidyo.io/join/uTwfkLPB", token, "DemoUser", "DemoRoom", this);
         Toast.makeText(VidyoActivity.this, "Connecting", Toast.LENGTH_LONG).show();
     }
 
-    public void Connect() {
+    public void Start(View v) {
+        vc = new Connector(videoFrame, Connector.ConnectorViewStyle.VIDYO_CONNECTORVIEWSTYLE_Default, 15, "warning info@VidyoClient info@VidyoConnector", "", 0);
+        vc.showViewAt(videoFrame, 0, 0, videoFrame.getWidth(), videoFrame.getHeight());
+        Toast.makeText(VidyoActivity.this, "Starting", Toast.LENGTH_LONG).show();
     }
 
-    public void Disconnect() {
+    public void Connect(View v) {
+        String token = "cHJvdmlzaW9uAHVzZXIxQGJmY2YwYS52aWR5by5pbwA2MzcxMDAyOTMxNQAAMTBhNDdjYjdkYWIxNDUyZDRmZTgzOWYyNjlmZmE2NTI4MWU5YmY1YmU2OGUxZjJjNjJjY2VhNzc0NWYyZGNiYjkyYzVkNTYwNmZjZDEyZTQ3NmRlZWI0NTE1MGU3OTc2";
+        vc.connect("prod.vidyo.io", token, "DemoUser", "DemoRoom", this);
+    }
+
+    public void Disconnect(View v) {
         vc.disconnect();
         Toast.makeText(VidyoActivity.this, "Disconnecting", Toast.LENGTH_LONG).show();
         startActivity(new Intent(VidyoActivity.this, Tabs.class));
@@ -73,7 +61,6 @@ public class VidyoActivity extends AppCompatActivity implements Connector.IConne
 
     @Override
     public void onSuccess() {
-        start.hide();
         Toast.makeText(VidyoActivity.this, "Connected", Toast.LENGTH_SHORT).show();
     }
 

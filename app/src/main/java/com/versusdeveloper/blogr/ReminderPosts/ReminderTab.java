@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,15 +20,13 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.versusdeveloper.blogr.Accounts.MainActivity;
+import com.versusdeveloper.blogr.MainActivity;
 import com.versusdeveloper.blogr.ProfileActivity;
 import com.versusdeveloper.blogr.R;
 import com.versusdeveloper.blogr.VidyoActivity;
@@ -40,7 +39,6 @@ public class ReminderTab extends Fragment {
 
     private FloatingActionButton video, resume;
     private ImageView profile;
-    private TextView name, email;
     private View view;
 
     @Override
@@ -56,25 +54,20 @@ public class ReminderTab extends Fragment {
         mLayoutManager.setStackFromEnd(true);
 
         profile = rootView.findViewById(R.id.mainProfileImage);
-        name = rootView.findViewById(R.id.mainUsername);
-        email = rootView.findViewById(R.id.mainEmail);
 
         video = rootView.findViewById(R.id.fabVideo);
         resume = rootView.findViewById(R.id.fabResume);
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         profile.setImageURI(Uri.parse(FirebaseDatabase.getInstance()
                 .getReference().child("Users")
-                .child(uid).child("images")
+                .child(uid).child("userFiles")
                 .toString()));
 
         profile.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setMessage("Sign Out?");
@@ -82,26 +75,20 @@ public class ReminderTab extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         fAuth.signOut();
-                        startActivity(new Intent(getActivity(), MainActivity.class));
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
                     }
                 });
-
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 });
-
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
-
                 return true;
             }
         });
-
-        name.setText(userName);
-        email.setText(userEmail);
 
         video.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,9 +105,6 @@ public class ReminderTab extends Fragment {
                 startActivity(reminders);
             }
         });
-//
-//        Snackbar.make(view, "Welcome " + userName, Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show();
 
         mNotesList = rootView.findViewById(R.id.rv_reminders);
         mNotesList.setLayoutManager(mLayoutManager);

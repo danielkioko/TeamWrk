@@ -1,4 +1,4 @@
-package com.versusdeveloper.blogr.Accounts;
+package com.versusdeveloper.blogr;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,9 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.versusdeveloper.blogr.R;
-import com.versusdeveloper.blogr.RegisterActivity;
-import com.versusdeveloper.blogr.Tabs;
+import com.versusdeveloper.blogr.ReminderPosts.ReminderTab;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.etEmail);
         password = findViewById(R.id.etPassword);
 
+//        String user = "d@d.com" .toString().trim();
+//        String uPassword = "password";
+//
+//        firebaseAuth.signInWithEmailAndPassword(user, uPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                Intent intent = new Intent(MainActivity.this, Tabs.class);
+//                startActivity(intent);
+//            }
+//        });
+
         createAccount = findViewById(R.id.btnCreateAccount);
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userEmail = email.getText().toString().trim();
                 String userPassword = password.getText().toString().trim();
-
 
                 if (userEmail.isEmpty()){
                     Toast.makeText(MainActivity.this, "No Email?", Toast.LENGTH_LONG).show();
@@ -69,8 +77,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void logInUsers(String userEmail, String userPassword) {
-        firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        String uEmail = "new@new.com";
+        String uPassword = "password";
+
+        firebaseAuth.signInWithEmailAndPassword(uEmail, uPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                startActivity(new Intent(MainActivity.this, Tabs.class));
+            }
+        });
+
+    }
+
+    private void logInUsers(String user, String uPassword) {
+        firebaseAuth.signInWithEmailAndPassword(user, uPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){

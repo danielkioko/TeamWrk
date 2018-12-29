@@ -17,7 +17,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.versusdeveloper.blogr.Accounts.AccountTabs;
+import com.versusdeveloper.blogr.MainActivity;
 import com.versusdeveloper.blogr.R;
 
 public class ImageTab extends Fragment {
@@ -39,15 +39,6 @@ public class ImageTab extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.image_posts, container, false);
 
-//        fab = rootView.findViewById(R.id.material_design_floating_action_menu_item2);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), NewImagePost.class);
-//                startActivity(intent);
-//            }
-//        });
-
         recyclerView = rootView.findViewById(R.id.imageRV);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -61,7 +52,7 @@ public class ImageTab extends Fragment {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (mAuth.getCurrentUser()==null){
-                    Intent loginIntent = new Intent(getActivity(), AccountTabs.class);
+                    Intent loginIntent = new Intent(getActivity(), MainActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(loginIntent);
                 }

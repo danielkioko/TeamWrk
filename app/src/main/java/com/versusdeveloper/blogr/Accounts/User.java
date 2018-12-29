@@ -7,7 +7,7 @@ public class User {
     private String email;
     private String image;
 
-    public User() {
+    public User(String uid, String displayName, String email) {
     }
 
     public User(String userId, String displayName, String email, String image) {
